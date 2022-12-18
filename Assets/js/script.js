@@ -57,17 +57,27 @@ function selectAnswer(e) {
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
   } else {
-    startButton.innerText = 'Restart'
+    questionContainerElement.classList.add('hide'); //ends the game
+    window.alert(
+        "Stats:\nRight: " + right + "\nWrong: " + incorrect + "\nYour Score: " + YourScore
+      ); //scoreboard
+    startButton.innerText = 'Try Again'
     startButton.classList.remove('hide')
   }
 }
 
+let right, incorrect = 0 //my variables for the scoreboard
+
 function setStatusClass(element, correct) {
   clearStatusClass(element)
   if (correct) {
+    right++
+    console.log(right)
     element.classList.add('correct')
   } else {
+    incorrect++
     element.classList.add('wrong')
+    console.log(incorrect)
   }
 }
 
@@ -78,19 +88,19 @@ function clearStatusClass(element) {
 
 const questions = [
   {
-    question: 'What is 2 + 2?',
+    question: 'Coding is fun (T/F)?',
     answers: [
-      { text: '4', correct: true },
-      { text: '22', correct: false }
+      { text: 'True', correct: true },
+      { text: 'False', correct: false }
     ]
   },
   {
-    question: 'Who is the best YouTuber?',
+    question: 'What type is true/false?',
     answers: [
-      { text: 'Web Dev Simplified', correct: true },
-      { text: 'Traversy Media', correct: true },
-      { text: 'Dev Ed', correct: true },
-      { text: 'Fun Fun Function', correct: true }
+      { text: 'Boolean', correct: true },
+      { text: 'Int', correct: false },
+      { text: 'String', correct: false },
+      { text: 'Yo Mama', correct: false }
     ]
   },
   {
@@ -103,10 +113,44 @@ const questions = [
     ]
   },
   {
-    question: 'What is 4 * 2?',
+    question: 'CSS stands for Cascading Colored Sheets',
     answers: [
-      { text: '6', correct: false },
-      { text: '8', correct: true }
+      { text: 'Exactement!', correct: false },
+      { text: 'Nah bro, but close', correct: true }
     ]
   }
 ]
+
+//Timer
+var timeEl = document.querySelector(".time");
+
+var secondsLeft = 15;
+
+function setTime() {
+  // Sets interval in variable
+  var timerInterval = setInterval(function () {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft + "remaining";
+
+    if (secondsLeft === 0) {
+      // Stops execution of action at set interval
+      //clearInterval(timerInterval);
+      // Calls function to create and append image
+      return;
+    }
+    //for the points added and deducted
+    if (correct === false) {
+    secondsLeft-30;
+    timeEl.textContent = secondsLeft + "remaining";
+    } else if (correct !== false) {
+        secondsLeft+30;
+        timeEl.textContent = secondsLeft + "remaining";
+    }
+  }, 1000);
+}
+
+//scoreboard
+
+let YourScore = ( right / questions.length ) *100
+console.log(YourScore)
+
