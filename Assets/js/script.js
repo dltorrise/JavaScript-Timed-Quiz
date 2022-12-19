@@ -92,19 +92,19 @@ function selectAnswer(e) {
   }
 }
 
-let right, incorrect = 0 //my variables for the scoreboard
+//let right, incorrect = 0 //my variables for the scoreboard
 
 function setStatusClass(element, correct) {
   clearStatusClass(element)
   if (correct) {
-    right++
-    console.log(right)
+    //right++
+    //console.log(right)
     element.classList.add('correct')
   } else {
-    incorrect++ //can't seem to get these increment operators to work
+    //incorrect++ //can't seem to get these increment operators to work
     element.classList.add('wrong')
-    console.log(incorrect)
-    secondsLeft = secondsLeft -= 5; //what the heck
+    //console.log(incorrect)
+    //secondsLeft = secondsLeft -= 5; //what the heck
   }
 }
 
@@ -202,7 +202,7 @@ renderLastRegistered();
 
 function renderLastRegistered() {
   var highScores = document.getElementById("high-scores")
-  highScores.value = localStorage.getItem("initials")
+  highScores.innerText= localStorage.getItem("Time")
 }
 
 saveButton.addEventListener("click", function(event) {
