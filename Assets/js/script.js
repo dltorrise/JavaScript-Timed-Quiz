@@ -18,7 +18,8 @@ nextButton.addEventListener('click', () => {
 })
 
 function startGame() {
-  setTime()
+  setTime() //starts timer
+  incorrect = 0
   startButton.classList.add('hide')
   shuffledQuestions = questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0
@@ -65,6 +66,8 @@ function selectAnswer(e) {
     nextButton.classList.remove('hide')
   } else {
     questionContainerElement.classList.add('hide'); //ends the game
+    //clearInterval(timerInterval);
+   //secondsLeft = 60; //returns it to original time
     window.alert(
         "Stats:" + "\nWrong: " + incorrect 
       ); //scoreboard
@@ -159,16 +162,18 @@ function setTime() {
 
 //scoreboard
 
-let YourScore = ( right / questions.length ) *100
-console.log(YourScore)
 
 var savedInitials = document.getElementById("initials"); //where it displays
 var comment = document.getElementById("msg"); // write in the initials
 var saveButton = document.getElementById("save"); //save button
+var yourScore = document.getElementById("yourScore")
+
+yourScore.textContent += JSONstringify(incorrect);
 
 saveButton.addEventListener("click", function (event) {
   event.preventDefault(); // prevents it from refreshing
   localStorage.setItem("Initials", comment); //saves initials
-  savedInitials.innerText = localStorage.getItems("Initials") + wrong 
+  localStorage.setItem("Score", wrong)
+  savedInitials.innerText = localStorage.getItems("Initials", "Score") + wrong 
 });
 

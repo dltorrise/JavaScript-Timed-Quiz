@@ -16,11 +16,13 @@
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
     background-color: hsl(var(--hue), 100%, 20%);
   }
-
+  main {
+    margin-left: 150px;
+    align-self: center;
+  }
   article {
     align-self: center;
     width: 100px;
