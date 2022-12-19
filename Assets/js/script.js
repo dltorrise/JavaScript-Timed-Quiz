@@ -11,7 +11,7 @@ var score = document.querySelector(".score")
 
 //variables
 //var secondsLeft = 0;
-var secondsLeft = 20
+var secondsLeft = 60
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', startGame)
@@ -83,7 +83,7 @@ function selectAnswer(e) {
     //window.alert("Sorry! You ran out of time"); //scoreboard, might have to delete this because it is a nuisance
     startButton.innerText = 'Try Again'
     startButton.classList.remove('hide')
-    secondsLeft = 20 // resets
+    secondsLeft = 60 // resets
     //clearInterval(timerInterval);
    //secondsLeft = 60; //returns it to original time
     // window.alert(
@@ -104,7 +104,7 @@ function setStatusClass(element, correct) {
     incorrect++ //can't seem to get these increment operators to work
     element.classList.add('wrong')
     console.log(incorrect)
-    //secondsLeft = secondsLeft - 5; //what the heck
+    secondsLeft = secondsLeft -= 5; //what the heck
   }
 }
 
@@ -163,19 +163,25 @@ function setTime() {
     if (secondsLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
-      //secondsLeft = 0; //returns it to original time
-      //var TimeEl = document.getElementById("Timer") // i think it's case sensitive
-      //TimeEl.classList.add('hide')
       questionContainerElement.classList.add('hide'); //ends the game
-      //window.alert("Sorry! You ran out of time"); //scoreboard, might have to delete this because it is a nuisance
+      //window.alert("Sorry! You ran out of time"); 
       startButton.innerText = 'Try Again'
+      nextButton.classList.add('hide') //this needs to work
       startButton.classList.remove('hide')
-      secondsLeft = 20 // resets
-      // Calls function to create and append image
+      secondsLeft = 60 // resets
       scoreboard.classList.remove('hide')
-  
+      return; 
+    } else if (secondsLeft < 0) { //this way it can never be negative
+      clearInterval(timerInterval);
+      timeEl.textContent = "0 seconds remaining"; //goes to 0 if you run out of time
+      questionContainerElement.classList.add('hide'); //ends the game
+      //window.alert("Sorry! You ran out of time"); 
+      startButton.innerText = 'Try Again'
+      nextButton.classList.add('hide')
+      startButton.classList.remove('hide')
+      secondsLeft = 60 // resets
+      scoreboard.classList.remove('hide')
       return;
-      
     }
     //for the points added and deducted
 

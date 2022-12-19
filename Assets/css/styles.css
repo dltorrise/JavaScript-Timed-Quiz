@@ -20,7 +20,7 @@
     background-color: hsl(var(--hue), 100%, 20%);
   }
   main {
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: 150px;
     align-self: center;
     height: 300px;
