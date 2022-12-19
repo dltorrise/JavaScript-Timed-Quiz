@@ -49,14 +49,14 @@ function showQuestion(question) {
 
 function resetState() {
   clearStatusClass(document.body)
-  nextButton.classList.add('hide')
+  nextButton.classList.add('hide') // hides the next button
   while (answerButtonsElement.firstChild) {
-    answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+    answerButtonsElement.removeChild(answerButtonsElement.firstChild) // removes the answer you selected (i think)
   }
 }
 
 function selectAnswer(e) {
-  const selectedButton = e.target
+  const selectedButton = e.target // where you click
   const correct = selectedButton.dataset.correct
   setStatusClass(document.body, correct)
   Array.from(answerButtonsElement.children).forEach(button => {
@@ -66,11 +66,13 @@ function selectAnswer(e) {
     nextButton.classList.remove('hide')
   } else {
     questionContainerElement.classList.add('hide'); //ends the game
+    timeEl.textContent = "Timer"
+    secondsLeft = 1 //so it doesn't count down
     //clearInterval(timerInterval);
    //secondsLeft = 60; //returns it to original time
-    window.alert(
-        "Stats:" + "\nWrong: " + incorrect 
-      ); //scoreboard
+    // window.alert(
+    //     "Stats:" + "\nWrong: " + incorrect 
+    //   ); //scoreboard
     startButton.innerText = 'Try Again'
     startButton.classList.remove('hide')
   }
@@ -126,7 +128,7 @@ const questions = [
   {
     question: 'CSS stands for Cascading Colored Sheets',
     answers: [
-      { text: 'Exactement!', correct: false },
+      { text: 'Yes!', correct: false },
       { text: 'Nah bro, but close', correct: true }
     ]
   }
@@ -135,10 +137,12 @@ const questions = [
 //Timer
 var timeEl = document.querySelector(".time");
 
-var secondsLeft = 60;
+var secondsLeft = 0;
 
 function setTime() {
   // Sets interval in variable
+    timeEl.textContent = "" //gets rid of text in html
+    secondsLeft = 20; // it is solely this line of code
   var timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft + "remaining";
@@ -146,9 +150,11 @@ function setTime() {
     if (secondsLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
-      secondsLeft = 60; //returns it to original time
+      secondsLeft = 0; //returns it to original time
+      //var TimeEl = document.getElementById("Timer") // i think it's case sensitive
+      //TimeEl.classList.add('hide')
       questionContainerElement.classList.add('hide'); //ends the game
-      window.alert("Sorry! You ran out of time"); //scoreboard
+      //window.alert("Sorry! You ran out of time"); //scoreboard, might have to delete this because it is a nuisance
       startButton.innerText = 'Try Again'
       startButton.classList.remove('hide')
       // Calls function to create and append image
@@ -162,18 +168,28 @@ function setTime() {
 
 //scoreboard
 
+//Local storage
+//will be receiving score from variable defined in another function
 
-var savedInitials = document.getElementById("initials"); //where it displays
-var comment = document.getElementById("msg"); // write in the initials
-var saveButton = document.getElementById("save"); //save button
-var yourScore = document.getElementById("yourScore")
+var initialsInput = document.getElementById("initials") // gets input of initials
 
-yourScore.textContent += JSONstringify(incorrect);
+renderLastRegistered();
 
-saveButton.addEventListener("click", function (event) {
-  event.preventDefault(); // prevents it from refreshing
-  localStorage.setItem("Initials", comment); //saves initials
-  localStorage.setItem("Score", wrong)
-  savedInitials.innerText = localStorage.getItems("Initials", "Score") + wrong 
+
+
+function renderLastRegistered() {
+  var highScores = document.getElementById("high-scores")
+  highScores.value = localStorage.getItem("initials")
+}
+
+saveButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  if (initialsInput === "") {
+    return; // exits the function
+  } else {
+    localStorage.setItem("initials", initialsInput); //stores the intials
+    //localStorage.setItem("scores", incorrect); //stores the variables
+    renderLastRegistered();
+  }
 });
 
