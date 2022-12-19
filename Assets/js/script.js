@@ -36,7 +36,7 @@ function setNextQuestion() {
   showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
-let correct, wrong //for timer
+//let correct, wrong //for timer
 function showQuestion(question) {
   questionElement.innerText = question.question
   question.answers.forEach(answer => {
@@ -45,7 +45,7 @@ function showQuestion(question) {
     button.classList.add('btn')
     if (answer.correct) {
       button.dataset.correct = answer.correct
-    } 
+    }
     button.addEventListener('click', selectAnswer)
     answerButtonsElement.appendChild(button)
   })
@@ -63,9 +63,9 @@ function selectAnswer(e) {
   const selectedButton = e.target // where you click
   const correct = selectedButton.dataset.correct
   setStatusClass(document.body, correct)
-  Array.from(answerButtonsElement.children).forEach(button => {
-    setStatusClass(button, button.dataset.correct) // not entirely sure 
-  })
+  // Array.from(answerButtonsElement.children).forEach(button => {
+  //   setStatusClass(button, button.dataset.correct) // not entirely sure 
+  // })
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
   } else {
@@ -104,7 +104,7 @@ function setStatusClass(element, correct) {
     //incorrect++ //can't seem to get these increment operators to work
     element.classList.add('wrong')
     //console.log(incorrect)
-    //secondsLeft = secondsLeft -= 5; //what the heck
+    secondsLeft = secondsLeft - 5; //what the heck, it decrements also when i get it right
   }
 }
 
