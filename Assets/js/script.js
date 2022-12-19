@@ -1,14 +1,15 @@
-/*Tonight I'm just going to figure out the scoreboard, but I still can't figure out
-exactly how to decrement time and in general just make the timer look better
- I also have to format everything else and make
-it look better. */
 
+//DOM Elements
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
+var timeEl = document.querySelector(".time"); //timer
 
+//variables
+//var secondsLeft = 0;
+var secondsLeft = 20
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', startGame)
@@ -60,14 +61,15 @@ function selectAnswer(e) {
   const correct = selectedButton.dataset.correct
   setStatusClass(document.body, correct)
   Array.from(answerButtonsElement.children).forEach(button => {
-    setStatusClass(button, button.dataset.correct)
+    setStatusClass(button, button.dataset.correct) // not entirely sure 
   })
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
   } else {
     questionContainerElement.classList.add('hide'); //ends the game
-    timeEl.textContent = "Timer"
-    secondsLeft = 1 //so it doesn't count down
+    //timeEl.textContent = "Timer"
+    secondsLeft = 1
+    //clearInterval(myInterval);
     //clearInterval(timerInterval);
    //secondsLeft = 60; //returns it to original time
     // window.alert(
@@ -90,7 +92,7 @@ function setStatusClass(element, correct) {
     incorrect++ //can't seem to get these increment operators to work
     element.classList.add('wrong')
     console.log(incorrect)
-    //secondsLeft -= 30; //what the heck
+    //secondsLeft = secondsLeft - 5; //what the heck
   }
 }
 
@@ -135,14 +137,11 @@ const questions = [
 ]
 
 //Timer
-var timeEl = document.querySelector(".time");
-
-var secondsLeft = 0;
 
 function setTime() {
   // Sets interval in variable
     timeEl.textContent = "" //gets rid of text in html
-    secondsLeft = 20; // it is solely this line of code
+ // it is solely this line of code
   var timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft + "remaining";
@@ -150,13 +149,14 @@ function setTime() {
     if (secondsLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
-      secondsLeft = 0; //returns it to original time
+      //secondsLeft = 0; //returns it to original time
       //var TimeEl = document.getElementById("Timer") // i think it's case sensitive
       //TimeEl.classList.add('hide')
       questionContainerElement.classList.add('hide'); //ends the game
       //window.alert("Sorry! You ran out of time"); //scoreboard, might have to delete this because it is a nuisance
       startButton.innerText = 'Try Again'
       startButton.classList.remove('hide')
+      secondsLeft = 20 // resets
       // Calls function to create and append image
   
       return;
