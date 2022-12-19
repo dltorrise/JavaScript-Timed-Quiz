@@ -1,3 +1,8 @@
+/*Tonight I'm just going to figure out the scoreboard, but I still can't figure out
+exactly how to decrement time and in general just make the timer look better
+ I also have to format everything else and make
+it look better. */
+
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
@@ -61,7 +66,7 @@ function selectAnswer(e) {
   } else {
     questionContainerElement.classList.add('hide'); //ends the game
     window.alert(
-        "Stats:\nRight: " + right + "\nWrong: " + incorrect + "\nYour Score: " + YourScore
+        "Stats:" + "\nWrong: " + incorrect 
       ); //scoreboard
     startButton.innerText = 'Try Again'
     startButton.classList.remove('hide')
@@ -127,7 +132,7 @@ const questions = [
 //Timer
 var timeEl = document.querySelector(".time");
 
-var secondsLeft = 150;
+var secondsLeft = 60;
 
 function setTime() {
   // Sets interval in variable
@@ -138,7 +143,13 @@ function setTime() {
     if (secondsLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
+      secondsLeft = 60; //returns it to original time
+      questionContainerElement.classList.add('hide'); //ends the game
+      window.alert("Sorry! You ran out of time"); //scoreboard
+      startButton.innerText = 'Try Again'
+      startButton.classList.remove('hide')
       // Calls function to create and append image
+  
       return;
     }
     //for the points added and deducted
@@ -150,4 +161,14 @@ function setTime() {
 
 let YourScore = ( right / questions.length ) *100
 console.log(YourScore)
+
+var savedInitials = document.getElementById("initials"); //where it displays
+var comment = document.getElementById("msg"); // write in the initials
+var saveButton = document.getElementById("save"); //save button
+
+saveButton.addEventListener("click", function (event) {
+  event.preventDefault(); // prevents it from refreshing
+  localStorage.setItem("Initials", comment); //saves initials
+  savedInitials.innerText = localStorage.getItems("Initials") + wrong 
+});
 
