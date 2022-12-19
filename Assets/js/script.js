@@ -67,16 +67,23 @@ function selectAnswer(e) {
     nextButton.classList.remove('hide')
   } else {
     questionContainerElement.classList.add('hide'); //ends the game
+    console.log("hello")
     //timeEl.textContent = "Timer"
-    secondsLeft = 1
-    //clearInterval(myInterval);
+    clearInterval(setTime);
+    console.log("goodbye")
+    //secondsLeft = 0; //returns it to original time
+    //var TimeEl = document.getElementById("Timer") // i think it's case sensitive
+    //TimeEl.classList.add('hide')
+    //questionContainerElement.classList.add('hide'); //ends the game
+    //window.alert("Sorry! You ran out of time"); //scoreboard, might have to delete this because it is a nuisance
+    startButton.innerText = 'Try Again'
+    startButton.classList.remove('hide')
+    secondsLeft = 20 // resets
     //clearInterval(timerInterval);
    //secondsLeft = 60; //returns it to original time
     // window.alert(
     //     "Stats:" + "\nWrong: " + incorrect 
     //   ); //scoreboard
-    startButton.innerText = 'Try Again'
-    startButton.classList.remove('hide')
   }
 }
 
@@ -165,6 +172,7 @@ function setTime() {
 
   }, 1000);
 }
+
 
 //scoreboard
 
