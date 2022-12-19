@@ -13,6 +13,7 @@ nextButton.addEventListener('click', () => {
 })
 
 function startGame() {
+  setTime()
   startButton.classList.add('hide')
   shuffledQuestions = questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0
@@ -25,6 +26,7 @@ function setNextQuestion() {
   showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
+let correct, wrong //for timer
 function showQuestion(question) {
   questionElement.innerText = question.question
   question.answers.forEach(answer => {
@@ -33,7 +35,7 @@ function showQuestion(question) {
     button.classList.add('btn')
     if (answer.correct) {
       button.dataset.correct = answer.correct
-    }
+    } 
     button.addEventListener('click', selectAnswer)
     answerButtonsElement.appendChild(button)
   })
@@ -75,9 +77,10 @@ function setStatusClass(element, correct) {
     console.log(right)
     element.classList.add('correct')
   } else {
-    incorrect++
+    incorrect++ //can't seem to get these increment operators to work
     element.classList.add('wrong')
     console.log(incorrect)
+    //secondsLeft -= 30; //what the heck
   }
 }
 
@@ -124,7 +127,7 @@ const questions = [
 //Timer
 var timeEl = document.querySelector(".time");
 
-var secondsLeft = 15;
+var secondsLeft = 150;
 
 function setTime() {
   // Sets interval in variable
@@ -134,18 +137,12 @@ function setTime() {
 
     if (secondsLeft === 0) {
       // Stops execution of action at set interval
-      //clearInterval(timerInterval);
+      clearInterval(timerInterval);
       // Calls function to create and append image
       return;
     }
     //for the points added and deducted
-    if (correct === false) {
-    secondsLeft-30;
-    timeEl.textContent = secondsLeft + "remaining";
-    } else if (correct !== false) {
-        secondsLeft+30;
-        timeEl.textContent = secondsLeft + "remaining";
-    }
+
   }, 1000);
 }
 
