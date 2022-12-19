@@ -6,6 +6,8 @@ const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 var timeEl = document.querySelector(".time"); //timer
+var scoreboard = document.querySelector(".scoreboard")
+var score = document.querySelector(".score")
 
 //variables
 //var secondsLeft = 0;
@@ -20,6 +22,7 @@ nextButton.addEventListener('click', () => {
 
 function startGame() {
   setTime() //starts timer
+  scoreboard.classList.add('hide') //removes scoreboard
   incorrect = 0
   startButton.classList.add('hide')
   shuffledQuestions = questions.sort(() => Math.random() - .5)
@@ -69,8 +72,10 @@ function selectAnswer(e) {
     questionContainerElement.classList.add('hide'); //ends the game
     console.log("hello")
     //timeEl.textContent = "Timer"
-    clearInterval(setTime);
+    clearInterval(timerInterval);
+    localStorage.setItem("Time", timeEl.textContent)
     console.log("goodbye")
+    scoreboard.classList.remove('hide')
     //secondsLeft = 0; //returns it to original time
     //var TimeEl = document.getElementById("Timer") // i think it's case sensitive
     //TimeEl.classList.add('hide')
@@ -145,13 +150,15 @@ const questions = [
 
 //Timer
 
+var timerInterval
+
 function setTime() {
   // Sets interval in variable
     timeEl.textContent = "" //gets rid of text in html
  // it is solely this line of code
-  var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
     secondsLeft--;
-    timeEl.textContent = secondsLeft + "remaining";
+    timeEl.textContent = secondsLeft + " seconds remaining";
 
     if (secondsLeft === 0) {
       // Stops execution of action at set interval
@@ -165,8 +172,10 @@ function setTime() {
       startButton.classList.remove('hide')
       secondsLeft = 20 // resets
       // Calls function to create and append image
+      scoreboard.classList.remove('hide')
   
       return;
+      
     }
     //for the points added and deducted
 
