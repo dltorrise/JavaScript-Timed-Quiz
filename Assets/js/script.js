@@ -195,6 +195,8 @@ function setTime() {
 //will be receiving score from variable defined in another function
 
 var initialsInput = document.getElementById("initials") // gets input of initials
+var saveButton = document.getElementById("sign-up")
+//initialsInput = initialsInput.value //so it doesn't show up as an HTML text area object
 
 renderLastRegistered();
 
@@ -210,7 +212,7 @@ saveButton.addEventListener("click", function(event) {
   if (initialsInput === "") {
     return; // exits the function
   } else {
-    localStorage.setItem("initials", initialsInput); //stores the intials
+    localStorage.setItem("initials", initialsInput.value); //stores the intials
     //localStorage.setItem("scores", incorrect); //stores the variables
     renderLastRegistered();
   }
