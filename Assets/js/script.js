@@ -8,6 +8,8 @@ const answerButtonsElement = document.getElementById('answer-buttons')
 var timeEl = document.querySelector(".time"); //timer
 var scoreboard = document.querySelector(".scoreboard")
 var score = document.querySelector(".score")
+var initialsInput = document.getElementById("initials") // gets input of initials
+var saveButton = document.getElementById("sign-up")
 
 //variables
 //var secondsLeft = 0;
@@ -81,6 +83,7 @@ function selectAnswer(e) {
     //TimeEl.classList.add('hide')
     //questionContainerElement.classList.add('hide'); //ends the game
     //window.alert("Sorry! You ran out of time"); //scoreboard, might have to delete this because it is a nuisance
+    score.textContent = timeEl.textContent
     startButton.innerText = 'Try Again'
     startButton.classList.remove('hide')
     secondsLeft = 60 // resets
@@ -154,7 +157,7 @@ var timerInterval
 
 function setTime() {
   // Sets interval in variable
-    timeEl.textContent = "" //gets rid of text in html
+    timeEl.textContent = "60 seconds remaining" //gets rid of text in html
  // it is solely this line of code
     timerInterval = setInterval(function () {
     secondsLeft--;
@@ -170,6 +173,7 @@ function setTime() {
       startButton.classList.remove('hide')
       secondsLeft = 60 // resets
       scoreboard.classList.remove('hide')
+      score.textContent = timeEl.textContent //shows your score when quiz is finished
       return; 
     } else if (secondsLeft < 0) { //this way it can never be negative
       clearInterval(timerInterval);
@@ -181,6 +185,7 @@ function setTime() {
       startButton.classList.remove('hide')
       secondsLeft = 60 // resets
       scoreboard.classList.remove('hide')
+      score.textContent = timeEl.textContent
       return;
     }
     //for the points added and deducted
@@ -194,17 +199,20 @@ function setTime() {
 //Local storage
 //will be receiving score from variable defined in another function
 
-var initialsInput = document.getElementById("initials") // gets input of initials
-var saveButton = document.getElementById("sign-up")
+
 //initialsInput = initialsInput.value //so it doesn't show up as an HTML text area object
 
-renderLastRegistered();
+renderLastRegistered(); //shift + option + down will copy line you are on to next one
+
+
 
 
 
 function renderLastRegistered() {
   var highScores = document.getElementById("high-scores")
-  highScores.innerText= localStorage.getItem("Time")
+  if (localStorage.getItem("initials")) {
+    highScores.innerText= localStorage.getItem("initials") + ": " + localStorage.getItem("Time")
+  }
 }
 
 saveButton.addEventListener("click", function(event) {
