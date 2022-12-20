@@ -8,6 +8,7 @@
     --hue-correct: 145;
   }
   
+/*most important selectors*/
 
   body {
     --hue: var(--hue-neutral);
@@ -20,12 +21,14 @@
     justify-content: space-around;
     background-color: hsl(var(--hue), 100%, 20%);
   }
+
   main {
     margin-top: 20px;
     margin-left: 150px;
     align-self: center;
     height: 300px;
   }
+
   article {
     align-self: center;
     width: 100px;
@@ -35,6 +38,7 @@
     padding: 10px;
     box-shadow: 0 0 10px 2px;
   }
+
   .card {
     height: 150px;
     margin-top: 0px;
