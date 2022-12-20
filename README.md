@@ -1,17 +1,14 @@
 # JavaScript-Timed-Quiz
 
-## Acceptance Criteria
+In Homework-4, I have completed all of the acceptance criteria, including:
+- There is a time decrement of 10 seconds everytime you get a question wrong
+- The quiz ends when the timer reaches zero
+- The timer starts when the quiz starts
+- You are able to see and save your scores and initials using local storage
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and my score
-```
+## Link and Screenshot
+
+You can access the live website [here](https://dltorrise.github.io/JavaScript-Timed-Quiz/)
+
+Here is a screenshot:
+![photo of cursor taking quiz with question: Coding is fun, true or false?](./Assets/images/screenshot.png)

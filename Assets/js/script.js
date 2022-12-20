@@ -12,9 +12,11 @@ var initialsInput = document.getElementById("initials") // gets input of initial
 var saveButton = document.getElementById("sign-up")
 
 //variables
-//var secondsLeft = 0;
 var secondsLeft = 60
 let shuffledQuestions, currentQuestionIndex
+var timerInterval
+
+//functions
 
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
@@ -38,7 +40,6 @@ function setNextQuestion() {
   showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
-//let correct, wrong //for timer
 function showQuestion(question) {
   questionElement.innerText = question.question
   question.answers.forEach(answer => {
@@ -57,7 +58,7 @@ function resetState() {
   clearStatusClass(document.body)
   nextButton.classList.add('hide') // hides the next button
   while (answerButtonsElement.firstChild) {
-    answerButtonsElement.removeChild(answerButtonsElement.firstChild) // removes the answer you selected (i think)
+    answerButtonsElement.removeChild(answerButtonsElement.firstChild) // removes the answer you selected 
   }
 }
 
@@ -67,47 +68,36 @@ function selectAnswer(e) {
   setStatusClass(document.body, correct)
   // Array.from(answerButtonsElement.children).forEach(button => {
   //   setStatusClass(button, button.dataset.correct) // not entirely sure 
-  // })
+  // For some reason this code was getting in the way of the decrement
+  //operator for when you got a problem wrong
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
   } else {
     questionContainerElement.classList.add('hide'); //ends the game
     console.log("hello")
-    //timeEl.textContent = "Timer"
     clearInterval(timerInterval);
     localStorage.setItem("Time", timeEl.textContent)
     console.log("goodbye")
     scoreboard.classList.remove('hide')
-    //secondsLeft = 0; //returns it to original time
-    //var TimeEl = document.getElementById("Timer") // i think it's case sensitive
-    //TimeEl.classList.add('hide')
-    //questionContainerElement.classList.add('hide'); //ends the game
-    //window.alert("Sorry! You ran out of time"); //scoreboard, might have to delete this because it is a nuisance
+    //window.alert("Sorry! You ran out of time"); 
+    //I'll work on getting these to work l8er
     score.textContent = timeEl.textContent
     startButton.innerText = 'Try Again'
     startButton.classList.remove('hide')
     secondsLeft = 60 // resets
-    //clearInterval(timerInterval);
-   //secondsLeft = 60; //returns it to original time
-    // window.alert(
-    //     "Stats:" + "\nWrong: " + incorrect 
-    //   ); //scoreboard
+
   }
 }
 
-//let right, incorrect = 0 //my variables for the scoreboard
+
 
 function setStatusClass(element, correct) {
   clearStatusClass(element)
   if (correct) {
-    //right++
-    //console.log(right)
     element.classList.add('correct')
   } else {
-    //incorrect++ //can't seem to get these increment operators to work
     element.classList.add('wrong')
-    //console.log(incorrect)
-    secondsLeft = secondsLeft - 5; //what the heck, it decrements also when i get it right
+    secondsLeft = secondsLeft - 10; //decrement when you get an answer wrong
   }
 }
 
@@ -153,8 +143,6 @@ const questions = [
 
 //Timer
 
-var timerInterval
-
 function setTime() {
   // Sets interval in variable
     timeEl.textContent = "60 seconds remaining" //gets rid of text in html
@@ -194,19 +182,9 @@ function setTime() {
 }
 
 
-//scoreboard
-
-//Local storage
-//will be receiving score from variable defined in another function
-
-
-//initialsInput = initialsInput.value //so it doesn't show up as an HTML text area object
+//Scoreboard and Local Storage
 
 renderLastRegistered(); //shift + option + down will copy line you are on to next one
-
-
-
-
 
 function renderLastRegistered() {
   var highScores = document.getElementById("high-scores")
@@ -221,7 +199,6 @@ saveButton.addEventListener("click", function(event) {
     return; // exits the function
   } else {
     localStorage.setItem("initials", initialsInput.value); //stores the intials
-    //localStorage.setItem("scores", incorrect); //stores the variables
     renderLastRegistered();
   }
 });

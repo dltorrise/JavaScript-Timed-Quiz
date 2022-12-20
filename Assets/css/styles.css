@@ -8,6 +8,7 @@
     --hue-correct: 145;
   }
   
+
   body {
     --hue: var(--hue-neutral);
     padding: 0;
@@ -44,11 +45,13 @@
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 10px 2px;
-    margin-left: 400px;
+    margin-left: 360px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
   }
+
+  /*need to edit this later */
 
   body.correct {
     --hue: var(--hue-correct);
