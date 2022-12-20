@@ -120,23 +120,23 @@ const questions = [
       { text: 'Boolean', correct: true },
       { text: 'Int', correct: false },
       { text: 'String', correct: false },
-      { text: 'Yo Mama', correct: false }
+      { text: 'Numeric Type', correct: false }
     ]
   },
   {
-    question: 'Is web development fun?',
+    question: 'What does JSON stand for?',
     answers: [
-      { text: 'Kinda', correct: false },
-      { text: 'YES!!!', correct: true },
-      { text: 'Um no', correct: false },
-      { text: 'IDK', correct: false }
+      { text: 'JavaScript Operator Notation', correct: false },
+      { text: 'JavaScript Object Notation', correct: true },
+      { text: 'JavaScript Obstruction Notarization', correct: false },
+      { text: 'JavaScript Obliterating Neutron', correct: false }
     ]
   },
   {
-    question: 'CSS stands for Cascading Colored Sheets',
+    question: 'What is an object?',
     answers: [
-      { text: 'Yes!', correct: false },
-      { text: 'Nah bro, but close', correct: true }
+      { text: 'A thing', correct: false },
+      { text: 'A key-value pair', correct: true }
     ]
   }
 ]
@@ -145,8 +145,7 @@ const questions = [
 
 function setTime() {
   // Sets interval in variable
-    timeEl.textContent = "60 seconds remaining" //gets rid of text in html
- // it is solely this line of code
+    timeEl.textContent = "60 seconds remaining" //gets rid of text in html before timer decrement is appended
     timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft + " seconds remaining";
