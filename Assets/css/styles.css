@@ -1,6 +1,11 @@
 *, *::before, *::after {
     box-sizing: border-box;
   }
+
+  h2,
+  h3 {
+    outline: 3px solid var(--hue);
+  }
   
   :root {
     --hue-neutral: 200;
