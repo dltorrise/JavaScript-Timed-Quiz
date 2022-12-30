@@ -12,3 +12,11 @@ You can access the live website [here](https://dltorrise.github.io/JavaScript-Ti
 
 Here is a screenshot:
 ![photo of cursor taking quiz with question: Coding is fun, true or false?](./Assets/images/screenshot.png)
+
+## Acknowledgments
+
+That you to Web Dev Simplified for helping me learn how to create a JavaScript Quiz. I used this video to help me create the foundational structure for the quiz. 
+
+[Video](https://www.youtube.com/watch?v=riDzcEQbX6k)
+
+[His Channel](https://www.youtube.com/@WebDevSimplified)
